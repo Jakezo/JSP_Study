@@ -47,7 +47,7 @@ public class Ex01_servlet extends HttpServlet {
 	 *       (2) 변수: request
 	 *       (3) 사용자의 요청을 저장하는 변수이다.
 	 *           예) 사용자가 입력한 검색어, 아이디, 비밀번호 등이 저장된 곳이다.
-	 *    3) 매개변수-2
+	 *    3) 매개변수-
 	 *       (1) 타입: HttpServletResponse
 	 *       (2) 변수: response
 	 *       (3) 서버의 응답 정보를 저장하는 변수이다.
