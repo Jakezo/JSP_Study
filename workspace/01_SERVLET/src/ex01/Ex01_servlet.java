@@ -42,7 +42,7 @@ public class Ex01_servlet extends HttpServlet {
 	 * 
 	 * 3. service() 메소드
 	 *    1) 실제 처리를 할 수 있다.
-	 *    2) 매개변수-1
+	 *    2) 매개변수-1 
 	 *       (1) 타입: HttpServletRequest
 	 *       (2) 변수: request
 	 *       (3) 사용자의 요청을 저장하는 변수이다.
