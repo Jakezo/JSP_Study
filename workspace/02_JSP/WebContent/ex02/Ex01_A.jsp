@@ -24,7 +24,7 @@
 
 	<h3>JSP로 데이터 보내기</h3>
 	<form method="get">
-		<label for="num1">첫 번째 정수</label>
+		<label for="num1">첫 번째 정수</label>	
 		<input type="text" name="num1" id="num1" /><br/>
 		<label for="num2">두 번째 정수</label>
 		<input type="text" name="num2" id="num2" /><br/><br/>
