@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;command.Commend.java&apos; to &apos;Command.java&apos;&#x0D;&#x0A;- Original project: &apos;18_CAPTCHA&apos;&#x0D;&#x0A;- Original element: &apos;command.Commend.java&apos;&#x0D;&#x0A;- Renamed element: &apos;command.Command.java&apos;" description="Rename compilation unit &apos;Commend.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;command{Commend.java" name="Command.java" references="false" stamp="1608530839753" version="1.0"/>
+</session>

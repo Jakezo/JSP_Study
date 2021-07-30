@@ -1,0 +1,31 @@
+package command.guest;
+
+import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import common.PathNRedirect;
+
+public class GuestDeleteFileCommand implements GuestCommand {
+
+	@Override
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
+
+		// 1. 서버 storage 디렉토리에서 gFilename 지우기
+		String gFilename = request.getParameter("gFilename");
+		String directory = "storage";
+		String realPath = request.getServletContext().getRealPath(directory);
+		
+		File file = new File(realPath, gFilename);
+		if ( file.exists() ) {
+			file.delete();
+		} 
+		
+		
+		// 2. DB에서 gFilename 지우기
+		
+		return null;
+	}
+
+}

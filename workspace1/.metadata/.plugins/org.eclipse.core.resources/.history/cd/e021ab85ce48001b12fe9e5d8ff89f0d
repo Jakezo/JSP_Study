@@ -1,0 +1,19 @@
+package command.guest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import common.PathNRedirect;
+
+public class GuestViewCommand implements GuestCommand {
+
+	@Override
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		String gNo = request.getParameter("gNo");
+		
+		
+		return null;
+	}
+
+}

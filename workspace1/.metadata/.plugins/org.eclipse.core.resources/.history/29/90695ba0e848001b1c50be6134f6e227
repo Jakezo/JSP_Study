@@ -1,0 +1,27 @@
+package command.guest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import common.PathNRedirect;
+
+public class GuestDeleteCommand implements GuestCommand {
+
+	@Override
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		String strgNo = request.getParameter("gNo");
+		
+		int gNo = 0;
+		if (strgNo != null && !strgNo.isEmpty()) {
+			gNo = Integer.parseInt(strgNo);
+		}
+		
+		PathNRedirect pathNRedirect = new PathNRedirect();
+		pathNRedirect.setPath("");
+		pathNRedirect.setRedirect(true);
+		
+		return pathNRedirect;
+	}
+
+}

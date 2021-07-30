@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DBCP중.. 커넥션 대여 시스템~ -->
+<Context>
+	<Resource 
+		auth="Container"
+		name="jdbc/oracle"
+		type="javax.sql.DataSource"
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		url="jdbc:oracle:thin:@localhost:1521:xe"
+		username="spring"
+		password="1111"
+		maxTotal="8"
+		maxIdle="2"
+		maxWaitMillis="5000"
+	/>
+	<!-- 
+		설명
+		주요 속성
+		1. name: 현재 Resource 식별 수단, 현재 Resource를 등록하는 이름. 
+				 'jdbc/ 원하는이름' 형식으로 이름 지정
+		2. type: Connection(resource) Pool을 관리하는 클래스 (connection pool: 연결 여러개 만들어..)
+		3. maxTotal: 최대 Connection의 개수
+		4. maxIdle: 사용하지 않고 대기하는 최대 Connection의 개수(Idle: 논다) 음수로 지정하면 커넥션 모두 사용함
+		5. maxWaitMillis: Connection의 최대 대기시간 (밀리초단위)
+		6.
+		7.
+		8.
+	 -->
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+</Context>

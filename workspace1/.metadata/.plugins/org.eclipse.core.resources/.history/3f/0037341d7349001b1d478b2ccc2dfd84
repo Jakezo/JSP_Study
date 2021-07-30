@@ -1,0 +1,25 @@
+package command.guest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import common.PathNRedirect;
+
+public class GuestUpdateCommand implements GuestCommand {
+
+	@Override
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
+
+		String directory = "storage";
+		String realPath = request.getServletContext().getRealPath(directory);
+		
+		MultipartRequest multipartRequest = new MultipartRequest(request, realPath, 1024 * 1024 * 10, "UTF-8", new DefaultFileRenamePolicy());
+		
+		
+		return null;
+	}
+
+}

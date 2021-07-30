@@ -1,0 +1,77 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+</div>
+		<!-- end body-wrap  -->
+		
+		<div class="foot_wrap">
+		
+			<div id="foot_main">FootPrint Partners</div>
+			<div class="left_foot">
+				<div id="partners">
+					<table class="partners">
+						<tr>
+							<td>상혜준</td>
+							<td>이주현</td>
+							<td>윤성민</td>
+							<td>나정호</td>
+						</tr>
+						<tr>
+							<td>sangjinju0321@gmail.com</td>
+							<td>ljh3900@gmail.com</td>
+							<td>ysm7663@naver.com</td>
+							<td>wjdgh823@naver.com</td>
+						</tr>
+						<tr>
+							<td>010-3021-1783</td>
+							<td>010-8453-3900</td>
+							<td>010-8626-2054</td>
+							<td>010-7151-5352</td>
+						</tr>
+					</table>
+				</div>
+				
+				<div id="address">
+					<table>
+						<tr>
+							<td>FootPrint, 5F, 15, Eonjin-ro 123-gil</td>
+						</tr>
+						<tr>
+							<td>Gangnam-gu, Seoul</td>
+						</tr>
+						<tr>
+							<td>Republic of Korea</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			<div class="right_foot">
+				<div id="contact">
+					<table>
+						<tr>
+							<td>FootPrint Contact</td>
+						</tr>
+						<tr>
+							<td>contact@footprint.com</td>
+						</tr>
+						<tr>
+							<td>Hiring</td>
+						</tr>
+						<tr>
+							<td>recruit@footprint.com</td>
+						</tr>
+						<tr>
+							<td>Phone</td>
+						</tr>
+						<tr>
+							<td>+82. 02. 234. 7723</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- end foot-wrap  -->
+	</div>
+</body>
+</html>

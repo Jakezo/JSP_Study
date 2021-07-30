@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mybatis.mapper.board">
+
+	<select id="getTotalRecord" resultType="int">
+		SELECT COUNT(*)
+		  FROM BOARD
+	</select>
+
+	<!--
+		1단 댓글만 허용되는 리스트 목록
+	<select id="boardList" parameterType="Map" resultType="dto.BoardDto">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		  		  FROM (SELECT	*
+		  		   		  FROM BOARD
+		  		   	  ORDER BY BGROUP DESC,
+		  		   	           BDEPTH ASC,
+		  		   	           BGROUPORD DESC) A) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+	-->
+	<!-- 대댓글이 가능한 리스트 목록 -->
+	<select id="boardList" parameterType="Map" resultType="dto.BoardDto">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		  		  FROM (SELECT	*
+		  		   		  FROM BOARD
+		  		   	  ORDER BY BGROUP DESC,
+		  		   	           BGROUPORD ASC) A) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+	
+	<insert id="boardInsert" parameterType="dto.BoardDto">
+		INSERT INTO
+		 BOARD
+		VALUES (BOARD_SEQ.NEXTVAL,
+				#{mId},
+				#{bTitle},
+				#{bContent},
+				#{bIp},
+				0,  <!-- 조회수 -->
+				SYSDATE,
+				SYSDATE,
+				0,  <!-- 정상게시글: 0, 삭제된게시글: -1 -->
+				BOARD_SEQ.CURRVAL,  <!-- BOARD_SEQ.NEXTVAL로 생성한 번호(bNo와 같다.) -->
+				0,  <!-- 그룹 내부 순서: 먼저 달린 댓글 판단용 -->
+				0  <!-- 게시글: 0, 댓글: 1 이상 -->
+				)
+	</insert>
+	
+	<select id="boardView" parameterType="int" resultType="dto.BoardDto">
+		SELECT *
+		  FROM BOARD
+		 WHERE BNO = #{bNo}
+	</select>
+	
+	<update id="boardUpdatebHit" parameterType="int">
+		UPDATE BOARD
+		   SET BHIT = BHIT + 1
+		 WHERE BNO = #{bNo}
+	</update>
+	
+	<update id="boardDelete" parameterType="int">
+		UPDATE BOARD
+		   SET BDELETE = -1
+		 WHERE BNO = #{bNo}
+	</update>
+	
+	<insert id="replyInsert" parameterType="dto.BoardDto">
+		INSERT INTO
+		 BOARD
+		VALUES (BOARD_SEQ.NEXTVAL,
+				#{mId},
+				#{bTitle},
+				#{bContent},
+				#{bIp},
+				0,  <!-- 조회수 -->
+				SYSDATE,
+				SYSDATE,
+				0,  <!-- 정상게시글: 0, 삭제된게시글: -1 -->
+				#{bGroup},  <!-- 게시글의 bNo와 같다. -->
+				#{bGroupOrd},  <!-- 그룹 내부 순서: 먼저 달린 댓글 판단용 -->
+				#{bDepth}  <!-- 게시글: 0, 댓글: 1 이상 -->
+				)
+	</insert>
+	
+	
+	<!-- 
+		1단 댓글용 
+		게시글의 번호(bNo)는 게시글과 댓글들의 그룹번호(bGroup)와 같다.
+	<update id="replyUpdatebGroupOrd2" parameterType="int">
+		UPDATE BOARD
+		   SET BGROUPORD = BGROUPORD + 1
+		 WHERE BGROUP = #{bNo}
+		   AND BGROUPORD != 0
+	</update>
+	-->
+	<!-- 대댓글 -->
+	<update id="replyUpdatebGroupOrd" parameterType="dto.BoardDto">
+		UPDATE BOARD
+		   SET BGROUPORD = BGROUPORD + 1
+		 WHERE BGROUP = #{bGroup}
+		   AND BGROUPORD > #{bGroupOrd}
+	</update>
+	
+	
+	<select id="getTotalQueryRecord" parameterType="Map" resultType="int">
+		SELECT COUNT(*)
+		  FROM BOARD
+		 WHERE BDELETE = 0
+		   AND <if test="column!='BOTH'">${column} LIKE '%' || #{query} || '%'</if>
+		       <if test="column=='BOTH'">(BTITLE LIKE '%' || #{query} || '%' OR BCONTENT LIKE '%' || #{query} || '%')</if>
+	</select>
+	
+	<!--
+		1단 댓글만 허용 + 검색 결과 리스트 목록 
+	<select id="queryBoardList" parameterType="Map" resultType="dto.BoardDto">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		  		  FROM (SELECT	*
+		  		   		  FROM BOARD
+		  		   		 WHERE BDELETE = 0
+		  		   		   AND <if test="column!='BOTH'">${column} LIKE '%' || #{query} || '%'</if>
+		       				   <if test="column=='BOTH'">(BTITLE LIKE '%' || #{query} || '%' OR BCONTENT LIKE '%' || #{query} || '%')</if>
+		  		   	  ORDER BY BGROUP DESC,
+		  		   	           BDEPTH ASC,
+		  		   	           BGROUPORD DESC) A) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+	-->
+	<!-- 대댓글 허용 + 검색 결과 리스트 목록 -->
+	<select id="queryBoardList" parameterType="Map" resultType="dto.BoardDto">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		  		  FROM (SELECT	*
+		  		   		  FROM BOARD
+		  		   		 WHERE BDELETE = 0
+		  		   		   AND <if test="column!='BOTH'">${column} LIKE '%' || #{query} || '%'</if>
+		       				   <if test="column=='BOTH'">(BTITLE LIKE '%' || #{query} || '%' OR BCONTENT LIKE '%' || #{query} || '%')</if>
+		  		   	  ORDER BY BGROUP DESC,
+		  		   	           BGROUPORD ASC) A) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+	
+	<select id="getTotalMyRecord" parameterType="Map" resultType="int">
+		SELECT COUNT(*)
+		  FROM BOARD
+		 WHERE MID = #{mId}
+	</select>
+	
+	<!-- 
+		1단 댓글만 허용 + 마이 리스트 목록 
+	<select id="myBoardList" parameterType="Map" resultType="dto.BoardDto">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		  		  FROM (SELECT	*
+		  		   		  FROM BOARD
+		  		   		 WHERE MID = #{mId}
+		  		   	  ORDER BY BGROUP DESC,
+		  		   	           BDEPTH ASC,
+		  		   	           BGROUPORD DESC) A) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+	-->
+	<!-- 대댓글 허용 + 마이 리스트 목록 -->
+	<select id="myBoardList" parameterType="Map" resultType="dto.BoardDto">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		  		  FROM (SELECT	*
+		  		   		  FROM BOARD
+		  		   		 WHERE MID = #{mId}
+		  		   	  ORDER BY BGROUP DESC,
+		  		   	           BGROUPORD ASC) A) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+	
+</mapper>

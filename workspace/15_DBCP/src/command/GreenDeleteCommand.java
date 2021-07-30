@@ -1,0 +1,31 @@
+package command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import common.PathNRedirect;
+import dao.GreenDao;
+
+public class GreenDeleteCommand implements GreenCommand {
+
+	@Override
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		int no = Integer.parseInt(request.getParameter("no"));
+		int result = GreenDao.getInstance().delete(no);
+	
+		PathNRedirect pathNRedirect = new PathNRedirect();
+		
+		//pathNRedirect.setPath("green/deleteResult.jsp");
+		if (result > 0) { // 삭제가 성공했을때
+			pathNRedirect.setPath("green/deleteSuccess.jsp");
+			pathNRedirect.setRedirect(true);	// redirect
+		} else {	// 삭제가 실패했을 떄
+			pathNRedirect.setPath("green/deleteFail.jsp");
+			pathNRedirect.setRedirect(false);	// forward
+		}
+		
+		return pathNRedirect;
+	}
+
+}

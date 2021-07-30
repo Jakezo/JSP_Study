@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
+<jsp:include page="../template/header.jsp">
+	<jsp:param value="BBS게시판" name="title" />
+</jsp:include>
+
+<table border="1">
+	<thead>
+		<tr>
+			<td></td>
+		</tr>
+	</thead>
+</table>
+
+<%@ include file="../template/footer.jsp" %>    

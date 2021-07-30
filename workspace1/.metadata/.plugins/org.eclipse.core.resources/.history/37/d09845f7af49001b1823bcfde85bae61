@@ -1,0 +1,5 @@
+package command.bbs;
+
+public class BBSInsertCommand implements BBSCommand {
+
+}

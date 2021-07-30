@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+a {
+	text-decoration: none;
+}
+
+.lgn_background {
+	background: gray;
+}
+
+.lgn_main {
+	border: 1px solid black;
+	background: white;
+}

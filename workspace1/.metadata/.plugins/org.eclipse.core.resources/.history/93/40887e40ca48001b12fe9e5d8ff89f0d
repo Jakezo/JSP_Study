@@ -1,0 +1,8 @@
+package command.guest;
+
+public class DownloadCommand {
+
+	// new DownloadCommand() 해서 객체를 만들 필요가 없도록 static 처리
+	public static 
+	
+}

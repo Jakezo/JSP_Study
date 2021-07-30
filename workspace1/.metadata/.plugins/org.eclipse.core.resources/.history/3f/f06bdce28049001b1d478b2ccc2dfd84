@@ -1,0 +1,15 @@
+package dto;
+
+import java.sql.Date;
+
+public class ReplyDto {
+
+	private int rNo;
+	private String rWriter;
+	private String rContent;
+	private String rPw;
+	private String rIp;
+	private Date rDate;
+	private int bbs_no;
+	
+}

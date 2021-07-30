@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+	<jsp:include page="../template/header.jsp">
+    	<jsp:param value="방명록" name="title"/>
+    </jsp:include>
+    
+    <script>
+    	function fn_guestDelete(f) {
+    		
+    	}
+    </script>
+    
+    <form>
+    
+    	삭제 비밀번호를 입력하세요 <br/>
+    	<input type="password" name="gPw" />
+    	
+    	<%-- 삭제할 때 필요한 gNo --%>
+    	<input type="hidden" name="gNo" value="${param.gNo}" />
+    	<input type="button" value="삭제하기" onclick="fn_guestDelete(this.form)" />	
+    	
+    </form>
+    
+    
+    <%@ include file="../template/footer.jsp" %> 

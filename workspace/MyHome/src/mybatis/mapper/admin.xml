@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mybatis.mapper.admin">
+
+	<select id="getTotalMemberCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+	</select>
+	
+	<select id="adminMemberList" parameterType="Map" resultType="dto.MemberDto">
+		SELECT B.*
+		  FROM (SELECT A.*, ROWNUM AS RN
+		  		  FROM (SELECT *
+		  		  		  FROM MEMBER
+		  		  	  ORDER BY MREGDATE DESC) A) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+	
+	<delete id="adminMemberBoardDelete" parameterType="String">
+		DELETE
+		  FROM BOARD
+		 WHERE MID = #{mId}
+	</delete>
+	
+	<delete id="adminMemberDelete" parameterType="int">
+		DELETE
+		  FROM MEMBER
+		 WHERE MNO = #{mNo}
+	</delete>
+
+	<select id="selectMemberBymNo" parameterType="int" resultType="dto.MemberDto">
+		SELECT *
+		  FROM MEMBER
+		 WHERE MNO = #{mNo}
+	</select>
+	
+	<update id="adminMemberUpdate" parameterType="dto.MemberDto">
+		UPDATE MEMBER
+		   SET MNAME = #{mName},
+		       MPHONE = #{mPhone},
+		       MEMAIL = #{mEmail},
+		       MADDRESS = #{mAddress}
+		 WHERE MID = #{mId}
+	</update>
+
+</mapper>
+
+
+
+
+
+
+
+

@@ -1,0 +1,61 @@
+package command.member;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
+
+import dao.MemberDao;
+import dto.MemberDto;
+
+
+@WebServlet("/MemberUpdate")
+public class MemberUpdate extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    public MemberUpdate() {
+        super();
+    }
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
+		String mPw = request.getParameter("mPw");
+		String mName = request.getParameter("mName");
+		String mEmail = request.getParameter("mEmail");
+		String mPhone = request.getParameter("mPhone");
+		String mAddress = request.getParameter("mAddress");
+		
+		MemberDto memberDto = new MemberDto();
+		memberDto.setmPw(mPw);
+		memberDto.setmNo(Integer.parseInt(mName));
+		memberDto.setmPw(mEmail);
+		memberDto.setmPw(mPhone);
+		memberDto.setmPw(mAddress);
+		
+		int result = MemberDao.getInstance().update(memberDto);
+		
+		// 결과 JSON 
+		// {"result" : true}	// 변경 성공
+		// {"result" : false}	// 변경 실피
+		JSONObject responseObj = new JSONObject();
+		if (result > 0) {
+			responseText = "yes";
+		} else {
+			responseText = "no";
+		}
+		
+		response.setContentType("text/plain; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println(responseText);
+		out.close();
+		
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

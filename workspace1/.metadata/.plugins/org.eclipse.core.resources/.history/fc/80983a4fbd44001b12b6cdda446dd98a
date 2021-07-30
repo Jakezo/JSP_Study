@@ -1,0 +1,5 @@
+package command.member;
+
+public interface MemberCommand {
+
+}

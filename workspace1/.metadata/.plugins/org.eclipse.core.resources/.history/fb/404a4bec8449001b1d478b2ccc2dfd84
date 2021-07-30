@@ -1,0 +1,23 @@
+package dao;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import mybatis.config.DBService;
+
+public class bbsDao {
+
+	// 필드
+	private SqlSessionFactory factory;
+	
+	// 생성자(Singleton)
+	private bbsDao() {
+		factory = DBService.getInstance().getFactory();
+	}
+	private static BBSDao bbsDao = new BBSDao();
+	public static BBSDao getInstance() {
+		return bbsDao;
+	}
+	
+	// 메소드
+	
+}

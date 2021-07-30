@@ -1,0 +1,32 @@
+package command.bbs;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import common.PageVo;
+import common.PathNRedirect;
+import dao.BBSDao;
+
+public class BBSListCommand implements BBSCommand {
+
+	@Override
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		// 1. PageVo 객체
+		PageVo pageVo = new PageVo();
+		
+		// 2. 전체 레코드의 개수 구하기
+		int totalRecord = BBSDao.getInstance().getTotalRecord();
+		pageVo.setTotalRecord(totalRecord);
+		
+		// 3. 전체 페이지의 개수 구하기
+		pageVo.setTotalPage();
+		
+		PathNRedirect pathNRedirect = new PathNRedirect();
+		pathNRedirect.setPath("bbs/bbsListPage.jsp");
+		pathNRedirect.setRedirect(false);
+		
+		return pathNRedirect;
+	}
+
+}

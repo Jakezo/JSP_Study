@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mybatis.mapper.mapper">
+<!-- 
+	패키지 : mybatis.mapper
+	클래스 : mapper
+-->
+
+<!-- 
+	1. 사용태그
+		1) <select>
+		2) <insert>
+		3) <update>
+		4) <delete>
+	2. 쿼리문에 전달할 파라미터가 있는 경우
+		: parameterType 속성
+		ex)
+			<select parameterType="int">    파라미터가 정수 
+			<select parameterType="dto.LimeDto">    파라미터가 dto패키지의 LimeDto 
+			<select parameterType="Map">    
+	3. 쿼리문의 결과
+		: resultType 속성
+		1) 결과가 List<LimeDto>인 경우	<select resultType="dto.LimeDto">
+		2) 결과가 LimeDto인 경우			<select resultType="dto.LimeDto">
+		3) 결과가 0 또는 1인 경우			<insert> <update> <delete> 태그는 resultType을 작성하지 않는다.
+ -->
+
+	<select id="list" resultType="dto.LimeDto">
+		SELECT * FROM LIME
+	</select>
+
+	<insert id="insert" parameterType="dto.LimeDto">
+		INSERT INTO 
+		LIME (NO, WRITER, TITLE, CONTENT, POSTDATE)
+		VALUES (LIME_SEQ.NEXTVAL, #{writer}, #{title}, #{content}, SYSDATE)
+	</insert>
+	
+	<select id="view" resultType="dto.LimeDto">
+		SELECT * FROM LIME WHERE NO = #{no}	
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM LIME WHERE NO = #{no}
+	</delete>
+		
+	<update id="update" parameterType="dto.LimeDto">
+		UPDATE LIME SET TITLE = #{title}, CONTENT = #{content} WHERE NO = #{no} 
+	</update>
+
+
+	
+</mapper>

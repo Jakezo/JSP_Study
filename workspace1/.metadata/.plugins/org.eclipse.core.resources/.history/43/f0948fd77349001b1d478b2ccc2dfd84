@@ -1,0 +1,40 @@
+package command.guest;
+
+import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import common.PathNRedirect;
+import dto.GuestDto;
+
+public class GuestUpdateCommand implements GuestCommand {
+
+	@Override
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
+
+		String directory = "storage";
+		String realPath = request.getServletContext().getRealPath(directory);
+		
+		MultipartRequest multipartRequest = new MultipartRequest(request, realPath, 1024 * 1024 * 10, "UTF-8", new DefaultFileRenamePolicy());
+			
+			
+		
+		GuestDto guestDto = new GuestDto();
+		guestDto.setgTitle(multipartRequest.getParameter("gTitle"));
+		guestDto.setgContent(multipartRequest.getParameter("gContent"));
+		guestDto.setgNo(Integer.parseInt(multipartRequest.getParameter("gNo")));
+		 
+		// 새로 첨부하려는 파일
+		File newFile = multipartRequest.getFile("gFilename");
+		
+		// 기존 첨부되어있는 파일
+		File oldFile = multipartRequest.getParameter("gFilename2");
+		
+		return null;
+	}
+
+}

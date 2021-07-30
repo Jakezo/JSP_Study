@@ -1,0 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<jsp:include page="../template/header.jsp">
+		<jsp:param value="아이디찾기" name="title" />
+</jsp:include>
+
+	
+	
+	
+
+	<%@ include file="../template/footer.jsp" %>

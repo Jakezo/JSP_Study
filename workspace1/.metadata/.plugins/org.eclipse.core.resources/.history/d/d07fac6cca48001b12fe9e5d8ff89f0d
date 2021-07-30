@@ -1,0 +1,11 @@
+package command.guest;
+
+public class DownloadCommand {
+
+	// new DownloadCommand()로 객체를 만들 필요가 없도록 static 처리
+	// DownloadCommand.download() 호출
+	public static download() {
+		
+	}
+	
+}

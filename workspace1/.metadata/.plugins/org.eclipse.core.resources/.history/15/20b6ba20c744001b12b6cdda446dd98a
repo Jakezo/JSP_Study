@@ -1,0 +1,25 @@
+package command.member;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import common.PathNRedirect;
+import dto.MemberDto;
+
+public class MemberLoginCommand implements MemberCommand {
+
+	@Override
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
+
+		String mId = request.getParameter("mId");
+		String mPw = request.getParameter("mPw");
+		
+		MemberDto mamberDto = new MemberDto();
+		memberDto.setmId(mId);
+		memberDto.setmPw(mPw);
+		
+		
+		return null;
+	}
+
+}

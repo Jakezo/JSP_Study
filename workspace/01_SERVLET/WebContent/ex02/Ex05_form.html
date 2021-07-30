@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	
+	label {
+		display: inline-block;
+		width: 150px;
+	}
+	
+</style>
+<script type="text/javascript">
+
+	function fn_send() {
+		
+		var f = document.forms.myForm;	// document.forms.폼이름
+		
+		if (f.name.value == '') {	// f.요소name속성.value속성
+			alert('이름을 입력하세요.');
+			f.name.focus();
+			return false;	// onsubmit="return false" 처리되면서 submit이 되지 않는다.
+		}
+		
+		if (f.age.value < 0 || f.age.value > 150 		// 자바스크립트에선 'f.age.value' 문자를 숫자로 변환하여 비교해준다. 
+				|| f.age.value == ''					// if ($('#age').val() == '') 
+				|| isNaN(f.age.value)) {
+			alert('나이가 올바르지 않습니다.');
+			f.age.focus();
+			return false;
+		}
+		
+		// address가 선택 요소라고 가정하면 검사할 필요가 없다.
+		
+		// submit을 허용하려면 true 값을 반환해야 한다.
+		return true;	// onsubmit = "return true";
+		
+	}
+
+</script>
+</head>
+<body>
+
+	<!-- 
+		1. <input type="submit" value="전송" />의 역할 : submit을 한다.
+		2. submit할 경로는 action에 작성한다. (action은 form 태그의 속성이다)
+		3. action 작성 방법 (URL을 작성하면 된다.)
+			: /contextPath/URLMapping
+		4. submit전에 검사하고 싶으면 form태그의 onsubmit속성에서 검사한다.
+	 -->
+
+	<h3>폼 요소를 서버로 보내기</h3>
+	<form name="myForm" method="get" action="/01_SERVLET/Ex05_form" onsubmit="return fn_send()">	<!-- "/01_SERVLET/Ex05_form"에서 / 꼭 넣을것 -->	
+	
+		<label for="name">이름</label>
+		<input type="text" id="name" name="name" /><br/>
+		<label for="age">나이</label>
+		<input type="text" id="age" name="age" /><br/>
+		<label for="address">주소</label>
+		<input type="text" id="address" name="address" /><br/>
+		<input type="submit" value="전송" />
+	</form>
+
+</body>
+</html>

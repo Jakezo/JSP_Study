@@ -1,0 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+	
+	<jsp:include page="../template/header.jsp">
+		<jsp:param value="비밀번호변경" name="title" />
+	</jsp:include>
+	
+	<script type="text/javascript">
+	
+		$(function(){
+			$('#changePwBtn').click(fn_changePw);
+		});
+		
+		function fn_changePw() {
+			if ($('#mPw').val() == '') {
+				alert('비밀번호를 입력하세요.');
+				$('#mPw').focus();
+				return;
+			} 
+			if ($('#mPw').val() != $('#mPw2').val()) {
+				alert('비밀번호 입력을 확인하세요.');
+				return;
+			}
+			$.ajax({
+				url: '/MyHome/MemberChangePw',
+				type: 'post',
+				data: {'mPw': '' + $('#mPw').val()},
+				dataType: 'text',
+				success: function(responseText) {
+					
+				},
+				error: function(){ alert('실패') }
+			});
+		}
+			
+		
+	
+	</script>
+	
+	<form>
+		<label for="mPw">새로운 비밀번호 입력</label><br/><br/>
+		<input type="password" id="mPw" name="mPw"/><br/><br/>
+		
+		<label for="mPw">비밀번호 확인</label><br/><br/>
+		<input type="password" id="mPw2" value="${param.mEamil}" /><br/><br/>
+		
+		<input type="hidden" name="mEmail" value="${param.mEmail}" />
+		
+		<input type="button" value="비밀번호 변경" id="changePwBtn" />
+	</form>
+
+	
+
+	<%@ include file="../template/footer.jsp" %>

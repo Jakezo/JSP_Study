@@ -1,0 +1,26 @@
+package dao;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import dto.MemberDto;
+import mybatis.config.DBService;
+
+public class GuestDao {
+
+	// 필드
+	private SqlSessionFactory factory;
+	
+	// 생성자(Singleton)
+	private GuestDao() {
+		factory = DBService.getInstance().getFactory();
+	}
+	private static GuestDao memberDao = new GuestDao();
+	public static GuestDao getInstance() {
+		return memberDao;
+	}
+	
+	// 메소드
+	
+	
+}

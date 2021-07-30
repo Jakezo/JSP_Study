@@ -1,0 +1,45 @@
+package command.guest;
+
+import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import common.PathNRedirect;
+import dao.GuestDao;
+import dto.GuestDto;
+
+public class GuestInsertCommand implements GuestCommand {
+
+	@Override
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
+
+		String directory = "storage";
+		String realpath = request.getServletContext().getRealPath(directory);
+		
+		File dir = new File(realPath);
+		
+		
+		String gTitle = request.getParameter("gTitle");
+		String gWriter = request.getParameter("gWriter");
+		String gPw = request.getParameter("gPw");
+		String gFilename = request.getParameter("gFilename");
+		String gContent = request.getParameter("gContent");
+				
+		GuestDto guestDto = new GuestDto();
+		guestDto.setgTitle(gTitle);
+		guestDto.setgWriter(gWriter);
+		guestDto.setgPw(gPw);
+		guestDto.setgFilename(gFilename);
+		guestDto.setgContent(gContent);
+		
+		int result = GuestDao.getInstance().insert(guestDto);
+		
+		PathNRedirect pathNRedirect = new PathNRedirect();
+		pathNRedirect.setPath("guest/guestListPage.jsp");
+		pathNRedirect.setRedirect(true);
+		
+		return pathNRedirect;
+	}
+
+}

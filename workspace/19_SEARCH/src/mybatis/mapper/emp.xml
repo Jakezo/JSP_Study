@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mybatis.mapper.emp">
+
+	<select id="getList" resultType="dto.EmpDto">
+		SELECT * 
+		FROM EMP
+	</select>
+
+	<select id="deptList" parameterType="Map" resultType="dto.EmpDto">
+		SELECT *
+		  FROM EMP
+		 WHERE DEPARTMENT_ID IN 
+		 <foreach item="department_id" collection="department_list" open="(" close=")" separator=",">
+		 	#{department_id}
+		 </foreach>
+	</select>
+
+	<!-- 
+	<select id="dynamicList" parameterType="Map" resultType="dto.EmpDto">
+		SELECT *
+		FROM EMP
+		<if test="column == 'EMPLOYEE_ID'">WHERE EMPLOYEE_ID = #{query}</if>
+		<if test="column == 'LAST_NAME'">WHERE LAST_NAME = #INITCAP{query}</if>
+	</select>
+	 -->
+		
+	<select id="dynamicList" parameterType="Map" resultType="dto.EmpDto">
+		SELECT * 
+		FROM EMP
+		WHERE ${column} = INITCAP(#{query})
+	</select>
+	<!-- 
+		# : WHERE #{column} = #{query}  >> 'EMPLOYEE_ID' = '102'
+		$ : WHERE ${column} = #{query}  >> EMPLOYEE_ID = '102'
+	 -->
+
+</mapper>

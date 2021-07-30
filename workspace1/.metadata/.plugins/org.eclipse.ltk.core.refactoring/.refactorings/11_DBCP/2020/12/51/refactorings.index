@@ -1,0 +1,10 @@
+1607996938487	Move file
+1607996960102	Delete element
+1607996968237	Delete element
+1607999501336	Move 'lib' to 'META-INF'
+1608000519180	Delete element
+1608000714105	Move 'lib' to 'WEB-INF'
+1608000728413	Delete element
+1608008543771	Copy package
+1608008547796	Delete element
+1608016395829	Encapsulate field 'filename'

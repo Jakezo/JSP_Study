@@ -1,0 +1,65 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+	
+	<jsp:include page="../template/header.jsp">
+		<jsp:param value="마이페이지" name="title" />
+	</jsp:include>
+	
+	<script>
+	
+		$(function() {
+			$('#signOutBtn').click(fn_signOut); 
+		});
+		
+		function fn_signOut (){
+			if (confirm('정말 탈퇴하시겠습니까?')){
+			$.ajax({
+				url:'/MyHome/MemberChangePw',
+				type: 'post',
+				data: $('#f').serialize(),	// 직렬화
+				dataType: 'text',
+				success: function(responseText) {
+					if (responseText.trim() == 'no') {
+						$('#updatePwResult').text('비밀번호가 변경되지 않았습니다.').css('color', 'red');
+					} else {
+						$('#updatePwResult').text('비밀번호가 변경되었습니다.').css('color', 'green');
+						$('#mPw0').val('');
+						$('#mPw').val('');
+						$('#mPw2').val('');
+						
+					}
+				},
+				error: function(){ alert('실패'); }
+			});
+			}
+		}
+	
+	
+	</script>
+	
+	<form id="f">
+	
+		<h1>회원을 정보를 확인하세요.</h1>
+	
+		아이디<br/>
+		${loginDto.mId}<br/><br/>
+		
+		성명<br/>
+		${loginDto.mName}<br/><br/>
+		
+		가입일<br/>
+		${loginDto.mRegDate}<br/><br/>
+		
+		<%-- hidden --%>
+		<input type="hidden" name="mNo" value="${loginDto.mNo}" />
+		<input type="hidden" name="mId" value="${loginDto.mId}" />
+		<input type="hidden" name="mRegDate" value="${loginDto.mRegDate}" />
+		
+		<input type="button" value="회원탈퇴하기" id="signOutBtn" />
+		<input type="button" value="되돌아가기" onclick="loaction.href='/MyHome/index.member'" />
+		
+	</form>
+	
+	
+	
+	<%@ include file="../template/footer.jsp" %>

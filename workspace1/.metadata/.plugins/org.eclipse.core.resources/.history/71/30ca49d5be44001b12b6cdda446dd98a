@@ -1,0 +1,16 @@
+package dto;
+
+import java.sql.Date;
+
+public class MemberDto {
+
+	private int mNo;
+	private String mId;
+	private String mPw;
+	private String mName;
+	private String mPhone;
+	private String mEmail;
+	private String mAddress;
+	private Date regDate;
+	
+}

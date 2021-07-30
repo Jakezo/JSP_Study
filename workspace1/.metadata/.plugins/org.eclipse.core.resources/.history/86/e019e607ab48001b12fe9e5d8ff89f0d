@@ -1,0 +1,15 @@
+package dto;
+
+import java.sql.Date;
+
+public class GuestDto {
+
+	private int gNo;
+	private String gWriter;
+	private String gTitle;
+	private String gContent;
+	private String gPw;
+	private String gFilename;
+	private Date gPostDate;
+	
+}

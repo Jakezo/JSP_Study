@@ -1,0 +1,22 @@
+package command.member;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import common.PathNRedirect;
+import dao.MemberDao;
+import dto.MemberDto;
+
+public class MemberFindIdCommand implements MemberCommand {
+
+	@Override
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
+
+		PathNRedirect pathNRedirect = new PathNRedirect();
+		pathNRedirect.setPath("member/findIdResult.jsp");
+		pathNRedirect.setRedirect(false);
+		
+		return pathNRedirect;
+	}
+
+}

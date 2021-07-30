@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mybatis.mapper.white">
+
+	<select id="getList" resultType="dto.WhiteDto">
+		SELECT NO, TITLE, CONTENT, POSTDATE
+		 FROM WHITE
+	</select>
+
+	<select id="getTitle" parameterType="String" resultType="dto.WhiteDto">
+		SELECT NO, TITLE, CONTENT, POSTDATE
+		FROM WHITE
+		WHERE TITLE LIKE '%' || #{query} || '%'	
+	</select>
+	
+	<select id="getContent" parameterType="String" resultType="dto.WhiteDto">
+		SELECT NO, TITLE, CONTENT, POSTDATE
+		FROM WHITE
+		WHERE CONTENT LIKE CONCAT('%', CONCAT(#{query}, '%'))
+	</select>
+	
+	<select id="getBoth" parameterType="String" resultType="dto.WhiteDto">
+		SELECT NO, TITLE, CONTENT, POSTDATE
+		FROM WHITE
+		WHERE TITLE LIKE #{query} OR CONTENT LIKE #{query}	
+	</select>
+	
+</mapper>
+
+

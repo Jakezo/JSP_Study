@@ -1,0 +1,25 @@
+package command.guest;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import common.PathNRedirect;
+import dao.GuestDao;
+
+public class QueryListCommand implements GuestCommand {
+
+	@Override
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
+
+		String query = request.getParameter("query");
+		
+		List<GuestDto> list = GuestDao.getInstance().queryList(query);
+		
+		PathNRedirect
+		
+		return null;
+	}
+
+}

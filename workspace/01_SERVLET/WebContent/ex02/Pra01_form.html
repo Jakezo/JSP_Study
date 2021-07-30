@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+
+</style>
+<script type="text/javascript">
+
+ // form 은 name 값으로 간다
+	
+	function fn_send(){
+		
+		var f = document.forms.serForm;
+		
+		if(f.name.value == ''){
+			alert('이름을 임력');
+			f.name.focus();
+			
+			return false;
+		}
+		
+		if(f.age.value < 0 || f.age.value > 150 || f.age.value =='' || isNaN(f.age.value)){
+			alert('나이가 올바르지 않습니다.');
+			f.age.focus();
+			return false;
+			
+		}
+		return true;
+	}
+
+
+</script>
+
+</head>
+<body>
+
+	<h3>폼요소 서버로 보냄</h3>
+	<form name="serForm" method="get" action="/01_SERVLET/Pra01JAVA_form" onsubmit="return fn_send()">
+	
+	<label for="name">이름</label>
+	<input type="text" id="name" name="name" /><br/>
+	<label for="age">나이</label>
+	<input type="text" name="age"/><br/>
+	<input type="submit" value="전송" />
+</form>
+
+</body>
+</html>

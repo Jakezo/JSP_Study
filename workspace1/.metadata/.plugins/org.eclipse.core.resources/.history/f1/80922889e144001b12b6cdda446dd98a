@@ -1,0 +1,24 @@
+package command.member;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import common.PathNRedirect;
+import dao.MemberDao;
+import dto.MemberDto;
+
+public class MemberFindIdCommand implements MemberCommand {
+
+	@Override
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
+
+		String mEmail = request.getParameter("eEmail");
+		
+		MemberDto memberDto = MemberDao.getInstance().selectBymEmail(mEmail);
+		
+		request.setAttribute("findId", memberDto.getmId());
+		
+		return null;
+	}
+
+}
