@@ -11,6 +11,8 @@
 	<%-- 1. "속성"으로 만들어서 request 전달 --%>
 	<%
 		request.setAttribute("name", "제임스");
+		request.setAttribute("age", 20);
+		
 		request.getRequestDispatcher("03_request_B.jsp").forward(request, response);
 	%>
 
