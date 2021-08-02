@@ -19,7 +19,7 @@
 				<td>사원ID</td>
 				<td>FIRST_NAME</td>
 				<td>LAST_NAME</td>
-				<td>연락처</td>
+				<td>연락처22</td>
 				<td>고용일</td>
 				<td>직업ID</td>
 				<td>연봉</td>
